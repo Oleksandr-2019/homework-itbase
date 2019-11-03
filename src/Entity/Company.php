@@ -22,7 +22,17 @@ class Company
      * @ORM\Column(type="string", length=255)
      */
     private $Title;
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Staff", mappedBy="company")
+     */
+  /*  private $staffs;
 
+    public function __construct()
+    {
+        $this->Staffs = new ArrayCollection();
+
+    }
+*/
     public function getId(): ?int
     {
         return $this->id;
@@ -40,4 +50,54 @@ class Company
         return $this;
     }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    //private $FullName;
+    /**
+     * @return Collection|Staff[]
+     */
+ /*   public function getFullName(): Collection
+    {
+        return $this->FullName;
+    }
+
+    public function addFullName(Staff $fullName): self
+    {
+        if (!$this->FullName->contains($fullName)) {
+            $this->FullName[] = $fullName;
+            $fullName->setTitle($this);
+        }
+
+        return $this;
+    }
+
+    public function removeFullName(Staff $fullName): self
+    {
+        if ($this->FullName->contains($fullName)) {
+            $this->FullName->removeElement($fullName);
+            // set the owning side to null (unless already changed)
+            if ($fullName->getTitle() === $this) {
+                $fullName->setTitle(null);
+            }
+        }
+
+        return $this;
+    }*/
 }

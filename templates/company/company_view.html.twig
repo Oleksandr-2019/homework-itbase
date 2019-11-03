@@ -1,0 +1,26 @@
+<section class="detail-info">
+    <h1>
+        Database output page
+    </h1>
+    <form class="detail-info__form">
+        <div>
+            <label for="detail-info__input-id">
+                Enter id number of the record you want to display
+            </label>
+            <input class="detail-info__input-id" id="detail-info__input-id" type="number" min="1">
+        </div>
+        <div>
+            <input class="detail-info__submit" type="submit" value="Start">
+        </div>
+    </form>
+    <div class="detail-info__output-id">
+        <h2>
+            Detail infromation for id №{{ idNumber }}
+        </h2>
+        <ul>
+            <li>
+                {{ titleCompany }}
+            </li>
+        </ul>
+    </div>
+</section>

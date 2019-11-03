@@ -35,13 +35,8 @@ class StaffEditController extends AbstractController
 
         $entityManager->flush();
 
-        return new Response('Edit this staff:'
-            .'</br>'.$staff->getFullName()
-            .'</br>'.$staff->getEmail()
-            .'</br>'.$staff->getPhone()
-            .'</br>'.$staff->getCreatedAt()
-            .'</br>'.$staff->getSkills()
-            .'</br>'.$staff->getComments()
-        );
+        return $this->render('staff/staff_edit.html.twig', array(
+
+        ));
     }
 }

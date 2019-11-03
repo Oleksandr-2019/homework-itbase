@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -17,7 +19,7 @@ class Project
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $Title;
 
@@ -54,4 +56,87 @@ class Project
 
         return $this;
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $Type;
+
+    /**
+     * @return Collection|ProjectPeople[]
+     */
+    public function getType(): Collection
+    {
+        return $this->Type;
+    }
+
+    public function addType(ProjectPeople $type): self
+    {
+        if (!$this->Type->contains($type)) {
+            $this->Type[] = $type;
+        }
+
+        return $this;
+    }
+
+    public function removeType(ProjectPeople $type): self
+    {
+        if ($this->Type->contains($type)) {
+            $this->Type->removeElement($type);
+        }
+
+        return $this;
+    }
+
+
+
+
+
+
+
+    /**
+     * @ORM\ManyToMany(targetEntity="App\Entity\ProjectPeople", inversedBy="projects")
+     */
+    private $projectPeoples;
+
+    public function __construct()
+    {
+        $this->projectPeoples = new ArrayCollection();
+    }
+
+    /**
+     * @return ArrayCollection
+     */
+    public function getProjectPeoples(): ArrayCollection
+    {
+        return $this->projectPeoples;
+    }
+
+    public function addProjectPeople(ProjectPeople $projectPeople): Project
+    {
+        if (!$this->projectPeoples->contains($projectPeople)) {
+            $this->projectPeoples->add($projectPeople);
+        }
+
+        return $this;
+    }
+
 }

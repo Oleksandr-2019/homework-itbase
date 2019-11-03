@@ -28,7 +28,8 @@ class DepartmentDeleteController extends AbstractController
 
         $entityManager->remove($department);
         $entityManager->flush();
-        return new Response('Delete this department: '.$department->getTitle());
+        return $this->render('department/department_delete.html.twig', array(
 
+        ));
     }
 }

@@ -28,7 +28,8 @@ class ProjectPeopleDeleteController extends AbstractController
 
         $entityManager->remove($projectPeople);
         $entityManager->flush();
-        return new Response('Delete this project people: '.$projectPeople->getType());
+        return $this->render('projectpeople/projectpeople_delete.html.twig', array(
 
+        ));
     }
 }

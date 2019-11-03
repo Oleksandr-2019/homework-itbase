@@ -33,8 +33,8 @@ class DepartmentEditController extends AbstractController
 
         $entityManager->flush();
 
-        return new Response(
-            'Edit department with id: '.$department->getTitle()
-        );
+        return $this->render('department/department_edit.html.twig', array(
+
+        ));
     }
 }

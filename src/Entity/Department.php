@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -30,6 +32,19 @@ class Department
      * @ORM\Column(type="string", length=255)
      */
     private $TeamLead;
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $FullName;
+    /**
+     * @ORM\ManyToMany(targetEntity="App\Entity\Staff", mappedBy="departments")
+     */
+    private $staffs;
+
+    public function __construct()
+    {
+        $this->staffs = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -70,5 +85,49 @@ class Department
         $this->TeamLead = $TeamLead;
 
         return $this;
+    }
+
+    /**
+     * @return Collection|Staff[]
+     */
+    public function getFullName(): Collection
+    {
+        return $this->FullName;
+    }
+
+    public function addFullName(Staff $fullName): self
+    {
+        if (!$this->FullName->contains($fullName)) {
+            $this->FullName[] = $fullName;
+            $fullName->addTitle($this);
+        }
+
+        return $this;
+    }
+
+    public function removeFullName(Staff $fullName): self
+    {
+        if ($this->FullName->contains($fullName)) {
+            $this->FullName->removeElement($fullName);
+            $fullName->removeTitle($this);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return ArrayCollection
+     */
+    public function getStaffs(): ArrayCollection
+    {
+        return $this->staffs;
+    }
+
+    /**
+     * @param ArrayCollection $staffs
+     */
+    public function setStaffs(ArrayCollection $staffs): void
+    {
+        $this->staffs = $staffs;
     }
 }

@@ -28,7 +28,8 @@ class StaffDeleteController extends AbstractController
 
         $entityManager->remove($staff);
         $entityManager->flush();
-        return new Response('Delete datail for: '.$staff->getFullName());
+        return $this->render('staff/staff_delete.html.twig', array(
 
+        ));
     }
 }

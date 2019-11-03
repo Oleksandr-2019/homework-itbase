@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -45,6 +47,24 @@ class Staff
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $Comments;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $Title;
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Company", inversedBy="staffs")
+     */
+    private $company;
+    /**
+     * @ORM\ManyToMany(targetEntity="App\Entity\Department", inversedBy="staffs")
+     */
+    private $departments;
+
+    public function __construct()
+    {
+        $this->departments = new ArrayCollection();
+    }
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Company", inversedBy="Staff")
@@ -127,4 +147,69 @@ class Staff
         return $this;
     }
 
+    /**
+     * @return Collection|Department[]
+     */
+    public function getTitle(): Collection
+    {
+        return $this->Title;
+    }
+
+    public function addTitle(Department $title): self
+    {
+        if (!$this->Title->contains($title)) {
+            $this->Title[] = $title;
+        }
+
+        return $this;
+    }
+
+    public function removeTitle(Department $title): self
+    {
+        if ($this->Title->contains($title)) {
+            $this->Title->removeElement($title);
+        }
+
+        return $this;
+    }
+
+    public function setTitle(?Company $title): self
+    {
+        $this->title = $title;
+
+        return $this;
+    }
+
+    /**
+     * @return ArrayCollection
+     */
+    public function getDepartments(): ArrayCollection
+    {
+        return $this->departments;
+    }
+
+    public function addDepartment(Department $department): Staff
+    {
+        if (!$this->departments->contains($department)) {
+            $this->departments->add($department);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getCompany()
+    {
+        return $this->company;
+    }
+
+    /**
+     * @param mixed $company
+     */
+    public function setCompany($company): void
+    {
+        $this->company = $company;
+    }
 }

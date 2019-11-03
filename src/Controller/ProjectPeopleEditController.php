@@ -31,8 +31,8 @@ class ProjectPeopleEditController extends AbstractController
 
         $entityManager->flush();
 
-        return new Response(
-            'Edit project people with id: '.$projectPeople->getType()
-        );
+        return $this->render('projectpeople/projectpeople_edit.html.twig', array(
+
+        ));
     }
 }

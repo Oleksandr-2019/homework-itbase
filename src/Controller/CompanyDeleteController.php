@@ -28,7 +28,8 @@ class CompanyDeleteController extends AbstractController
 
         $entityManager->remove($company);
         $entityManager->flush();
-        return new Response('Delete this company: '.$company->getTitle());
+        return $this->render('company/company_delete.html.twig', array(
 
+        ));
     }
 }
