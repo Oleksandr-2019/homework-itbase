@@ -72,6 +72,10 @@ class ProjectPeople
 
 
 
+/*   MANY TO MANY - project - project people */
+/*   MANY TO MANY - project - project people */
+/*   MANY TO MANY - project - project people */
+/*   MANY TO MANY - project - project people */
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)

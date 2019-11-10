@@ -22,9 +22,9 @@ class Company
      * @ORM\Column(type="string", length=255)
      */
     private $Title;
-    /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Staff", mappedBy="company")
-     */
+
+     // @ORM\OneToMany(targetEntity="App\Entity\Staff", mappedBy="company")
+
   /*  private $staffs;
 
     public function __construct()

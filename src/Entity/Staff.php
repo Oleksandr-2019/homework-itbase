@@ -5,7 +5,9 @@ namespace App\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
-
+use Doctrine\ORM\Mapping\JoinColumn;
+use Doctrine\ORM\Mapping\JoinTable;
+use Doctrine\ORM\PersistentCollection;
 /**
  * @ORM\Entity(repositoryClass="App\Repository\StaffRepository")
  */
@@ -63,7 +65,7 @@ class Staff
 
     public function __construct()
     {
-        $this->departments = new ArrayCollection();
+        $this->departments = new ArrayCollection;
     }
 
     /**
@@ -147,6 +149,15 @@ class Staff
         return $this;
     }
 
+
+
+
+
+
+
+
+
+
     /**
      * @return Collection|Department[]
      */
@@ -181,9 +192,9 @@ class Staff
     }
 
     /**
-     * @return ArrayCollection
+     * @return ArrayCollection|Department[]
      */
-    public function getDepartments(): ArrayCollection
+    public function getDepartments()
     {
         return $this->departments;
     }

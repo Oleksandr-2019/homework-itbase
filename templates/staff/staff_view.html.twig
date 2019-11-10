@@ -17,12 +17,15 @@
         <h2>
             Detail infromation for id №{{ idNumber }}
         </h2>
+        {% for dep in staff.departments %}
+            {{ dep.title }}
+        {% endfor %}
         <ul>
             <li>
-                {{ fullNameStaff }}
+                {{ staff.fullName }}
             </li>
             <li>
-                {{ fullEmail }}
+                {{ staff.email }}
             </li>
             <li>
                 {{ fullPhone }}

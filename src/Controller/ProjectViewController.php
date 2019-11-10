@@ -22,6 +22,9 @@ class ProjectViewController extends AbstractController
     {
         $em = $this->getDoctrine()->getManager();
         $project = $em->getRepository(Project::class)->find($id);
+
+
+
         return $this->render('project/project_view.html.twig', array(
             'idNumber' => $id,
             'titleProject' => $project->getTitle(),

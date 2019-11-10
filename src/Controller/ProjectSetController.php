@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Project;
 use App\Entity\ProjectPeople;
+use App\Entity\Department;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -26,17 +27,22 @@ class ProjectSetController extends AbstractController
         $projectPeople->setResponsibility('Text for browser Responsibility');
 
 
-
+        $department = new Department();
+        $department->setTitle('Full step');
+        $department->setDescription('Server and browser side development');
+        $department->setTeamLead('Eremenko');
 
         $project = new Project();
-        $project->setTitle('Gopchuk');
-        $project->setDescription('Medical help');
+        $project->setTitle('Energy news');
+        $project->setDescription('News about world energy');
         $project->addProjectPeople($projectPeople);
-        $project->addType('kkkkkkkkkkkkk');
+        $project->addDepartment($department);
+
 
         // tell Doctrine you want to (eventually) save the Company (no queries yet)
         $entityManager->persist($project);
         $entityManager->persist($projectPeople);
+        $entityManager->persist($department);
 
         // actually executes the queries (i.e. the INSERT query)
         $entityManager->flush();

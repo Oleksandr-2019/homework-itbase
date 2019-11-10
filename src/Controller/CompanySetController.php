@@ -1,49 +1,49 @@
 <?php
-// src/Controller/CompanyEditController.php
+// src/Controller/CompanySetController.php
 namespace App\Controller;
 
-use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-
 use App\Entity\Company;
+use App\Entity\Staff;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Response;
-
-
+use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
+
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\HttpFoundation\Request;
 use App\Form\Type\CompanyType;
 
-class CompanyEditController extends AbstractController
+class CompanySetController extends AbstractController
 {
     /**
-     * @Route("/company/edit/{id}", name="edit_company")
+     * @Route("/company/set", name="create_company")
      */
-    public function update($id, Request $request)
+    public function createCompany(Request $request): Response
     {
+
         // you can fetch the EntityManager via $this->getDoctrine()
         // or you can add an argument to the action: createCompany(EntityManagerInterface $entityManager)
 
         $entityManager = $this->getDoctrine()->getManager();
 
-        $company= $entityManager->getRepository(Company::class)->find($id);
+        // creates a task object and initializes some data for this example
+
+        $company = new Company();
+        $company->setTitle("");
 
         // creates a task object and initializes some data for this example
-        
-        $company->setTitle('');
 
         $form = $this->createFormBuilder($company)
             ->add('title', TextType::class)
             ->add('save', SubmitType::class, ['label' => 'Create companion record '])
             ->getForm();
 
-        $form = $this->createForm(CompanyType::class, $company);
+       $form = $this->createForm(CompanyType::class, $company);
 
-        $form->handleRequest($request);
-
+       $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
 
@@ -56,22 +56,20 @@ class CompanyEditController extends AbstractController
             // ... perform some action, such as saving the task to the database
             // for example, if Task is a Doctrine entity, save it!
             $entityManager = $this->getDoctrine()->getManager();
-
-            $company= $entityManager->getRepository(Company::class)->find($id);
-
             $entityManager->persist($company);
-
             $entityManager->flush();
+            $id = $company->getId();
 
-
-        } else {
-            return $this->render('company/company_set.html.twig', [
-                'form' => $form->createView(),
-            ]);
+            //$url = $this->generateUrl("edit_company", array('$id' => $id));
+            $url = $this->generateUrl(
+                'edit_company',
+                array('id' => $id)
+            );
+            return $this->redirect($url);
         }
-
         return $this->render('company/company_set.html.twig', [
             'form' => $form->createView(),
         ]);
+
     }
 }

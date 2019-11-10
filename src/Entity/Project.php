@@ -75,6 +75,11 @@ class Project
 
 
 
+/*   MANY TO MANY - project - project people */
+/*   MANY TO MANY - project - project people */
+/*   MANY TO MANY - project - project people */
+/*   MANY TO MANY - project - project people */
+
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
@@ -120,6 +125,7 @@ class Project
     public function __construct()
     {
         $this->projectPeoples = new ArrayCollection();
+        $this->departments = new ArrayCollection();
     }
 
     /**
@@ -139,4 +145,49 @@ class Project
         return $this;
     }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*   MANY TO MANY - department - project  */
+/*   MANY TO MANY - department - project  */
+/*   MANY TO MANY - department - project  */
+    /**
+     * @ORM\ManyToMany(targetEntity="App\Entity\Department", inversedBy="projects")
+     */
+    private $departments;
+
+    /**
+     * @return ArrayCollection
+     */
+    public function getDepartments(): ArrayCollection
+    {
+        return $this->departments;
+    }
+
+    public function addDepartment(Department $department): Project
+    {
+        if (!$this->departments->contains($department)) {
+            $this->departments->add($department);
+        }
+
+        return $this;
+    }
 }

@@ -31,9 +31,9 @@ class StaffSetController extends AbstractController
         $company->setTitle('FF');
 
         $staff = new Staff();
-        $staff->setFullName('Eremenko');
-        $staff->setEmail('Eremenko@gmail.com');
-        $staff->setPhone(263243);
+        $staff->setFullName('Zorya');
+        $staff->setEmail('Zorya@gmail.com');
+        $staff->setPhone(26353243);
         $staff->setCreatedAt('text3 for CreatedAt');
         $staff->setSkills('Html, CSS, SCSS, JS, PHP, Wordpress, Symfony');
         $staff->setComments('Junior developer');

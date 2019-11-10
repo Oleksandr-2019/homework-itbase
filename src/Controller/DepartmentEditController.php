@@ -13,7 +13,7 @@ use Symfony\Component\HttpFoundation\Response;
 class DepartmentEditController extends AbstractController
 {
     /**
-     * @Route("/department/edit/{id}")
+     * @Route("/department/edit/{id}", name="edit_department")
      */
     public function update($id)
     {

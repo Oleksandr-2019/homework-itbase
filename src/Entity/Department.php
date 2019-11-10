@@ -5,6 +5,7 @@ namespace App\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\Mapping\JoinTable;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\DepartmentRepository")
@@ -44,6 +45,7 @@ class Department
     public function __construct()
     {
         $this->staffs = new ArrayCollection();
+        $this->projects = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -90,7 +92,7 @@ class Department
     /**
      * @return Collection|Staff[]
      */
-    public function getFullName(): Collection
+    public function getFullName()
     {
         return $this->FullName;
     }
@@ -129,5 +131,52 @@ class Department
     public function setStaffs(ArrayCollection $staffs): void
     {
         $this->staffs = $staffs;
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    /*   MANY TO MANY - department - project  */
+    /*   MANY TO MANY - department - project  */
+    /*   MANY TO MANY - department - project  */
+    /**
+     * @ORM\ManyToMany(targetEntity="App\Entity\Project", inversedBy="department")
+     */
+    private $projects;
+
+    /**
+     * @return ArrayCollection
+     */
+    public function getProjects(): ArrayCollection
+    {
+        return $this->projects;
+    }
+
+    public function addProject(Project $project): Department
+    {
+        if (!$this->projects->contains($project)) {
+            $this->projects->add($project);
+        }
+
+        return $this;
     }
 }
