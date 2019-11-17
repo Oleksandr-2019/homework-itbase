@@ -44,8 +44,8 @@ class Department
 
     public function __construct()
     {
-        $this->staffs = new ArrayCollection();
-        $this->projects = new ArrayCollection();
+        $this->staffs = new ArrayCollection;
+        $this->projects = new ArrayCollection;
     }
 
     public function getId(): ?int
@@ -164,19 +164,32 @@ class Department
     private $projects;
 
     /**
-     * @return ArrayCollection
+     * @return ArrayCollection|Project[]
      */
-    public function getProjects(): ArrayCollection
+    public function getProjects()
     {
         return $this->projects;
     }
 
-    public function addProject(Project $project): Department
+    public function addProject(Project $projects): self
     {
-        if (!$this->projects->contains($project)) {
-            $this->projects->add($project);
+        if (!$this->projects->contains($projects)) {
+            $this->projects->add($projects);
+            $projects->addDepartment($this);
         }
 
         return $this;
     }
+
+    public function removeProject(Project $projects): self
+    {
+        if (!$this->projects->contains($projects)) {
+        $this->projects->remove($projects);
+        $projects->removeDepartment($this);
+        }
+
+        return $this;
+    }
+
+
 }

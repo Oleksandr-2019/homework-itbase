@@ -175,14 +175,14 @@ class Project
     private $departments;
 
     /**
-     * @return ArrayCollection
+     * @return Collection|Department[]
      */
-    public function getDepartments(): ArrayCollection
+    public function getDepartments(): Collection
     {
         return $this->departments;
     }
 
-    public function addDepartment(Department $department): Project
+    public function addDepartment(Department $department): self
     {
         if (!$this->departments->contains($department)) {
             $this->departments->add($department);
@@ -190,4 +190,14 @@ class Project
 
         return $this;
     }
+
+    public function removeDepartment(Department $department): self
+    {
+        if (!$this->departments->contains($department)) {
+            $this->departments->remove($department);
+        }
+
+        return $this;
+    }
+
 }
